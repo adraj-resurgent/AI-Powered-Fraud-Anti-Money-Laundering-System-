@@ -1,0 +1,48 @@
+/* Colors are hardcoded (not var(--…)) because the Next.js 16 Turbopack
+   production build on Render drops CSS custom properties, which stripped
+   the arrow/heading styling on deploy. */
+.section {
+  background-color: #ffffff;
+  padding: 88px 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding: 0 24px;
+}
+
+.heading {
+  font-size: 38px;
+  color: #1E3A5F;
+}
+
+/* ---------- Full-width card grid ----------
+   Dynamic columns that grow with the screen, capped at 5 (product count).
+   Cards stretch to fill the row instead of a fixed-width carousel. */
+.grid {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  padding: 16px clamp(24px, 3vw, 64px) 24px;
+  align-items: stretch;
+}
+
+@media (min-width: 768px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1440px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1920px) { .grid { grid-template-columns: repeat(5, 1fr); } }
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 30px;
+  }
+}

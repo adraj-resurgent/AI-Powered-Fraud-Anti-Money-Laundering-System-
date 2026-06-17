@@ -1,0 +1,223 @@
+/* Footer — centered, compact, logo blends naturally on navy (no white box). */
+
+/* footerMainContainer */
+.footer {
+  background-color: #1E3A5F;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-white);
+}
+
+/* Transparent pass-through wrapper — children center themselves */
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Top bar (footerContainer1) ---------- */
+/* Full-width solid white banner. Crisp navy border on top/left/right only.
+   No bottom border, no shadow, no gradient — sits perfectly flush against
+   the navy footer body below. */
+.topBarBand {
+  width: 100%;
+  background: #ffffff;
+  border-top: 2px solid #d4900a;
+  border-left: 2px solid #d4900a;
+  border-right: 2px solid #d4900a;
+  border-bottom: none;
+  box-sizing: border-box;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 20px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Logo sits transparently on the light cream band */
+.logo {
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+.logoImg {
+  width: 140px;
+  height: auto;
+  display: block;
+}
+
+.ctaWrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ctaText {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ---------- Divider (footerDivider) ---------- */
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 0 auto;
+  max-width: 1100px;
+  width: calc(100% - 120px);
+}
+
+/* ---------- Columns (footerContainer2) — centered together ---------- */
+.columns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 80px;
+  padding: 28px 40px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 160px;
+  max-width: 200px;
+}
+
+.columnHeading {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.columnLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.columnLink {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  line-height: 2;
+  transition: color var(--transition-base);
+}
+
+.columnLink:hover {
+  color: var(--color-accent);
+}
+
+/* ---------- Bottom bar (footerContainer3) ---------- */
+.bottomBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legalLinks {
+  display: flex;
+  gap: 20px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.legalLink {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color var(--transition-base);
+}
+
+.legalLink:hover {
+  color: var(--color-accent);
+}
+
+.fc3Icons {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.fc3Icon {
+  color: #d4900a;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.fc3Icon:hover {
+  color: #f5a800;
+  transform: scale(1.1);
+}
+
+/* ---------- Copyright (copyrightText) ---------- */
+.copyright {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding: 8px 0 0;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* "Made with ♥" line — sits 4px below the copyright line */
+.copyright + .copyright {
+  padding: 0 0 16px;
+  margin-top: 4px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .topBar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 24px;
+  }
+  .divider {
+    width: calc(100% - 48px);
+  }
+  .columns {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+    padding: 24px;
+  }
+  .column {
+    align-items: center;
+  }
+  .bottomBar {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    padding: 16px 24px;
+  }
+}

@@ -1,0 +1,4 @@
+/* Card fills its grid cell. Colors, hover, and the 3D-lift/glow stay inline. */
+.card {
+  width: 100%;
+}

@@ -1,0 +1,85 @@
+﻿# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Next.js build output
+/.next/
+/out/
+
+# Production build
+/build
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-err.log
+dev-out.log
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Claude
+.claude/
+
+# AWS specific
+.aws/
+aws-exports.js
+awsconfiguration.json
+amplifyconfiguration.json
+amplifyconfiguration.ts
+amplify-build-config.json
+amplify/.config/project-config.json
+amplify/backend/amplify-meta.json
+amplify/backend/.temp/
+build/
+dist/
+.amplify/
+.sst/
+cdk.out/
+cdk.context.json
+.serverless/
+serverless-state.json
+samconfig.toml
+.aws-sam/
+
+# Secrets and keys — CRITICAL for AWS
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+accessKeys.csv
+credentials
+.gstack/
+
+# Database dumps & local scratch — may contain real data; never commit
+backup.sql
+deployment-rca/
+
+# Misc local artifacts
+dev-err.log
+dev-out.log
+tsconfig.tsbuildinfo

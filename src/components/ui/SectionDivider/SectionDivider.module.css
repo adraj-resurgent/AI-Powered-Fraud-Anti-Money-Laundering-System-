@@ -1,0 +1,13 @@
+.divider {
+  display: block;
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--color-accent);
+  margin: 0 auto 20px;
+}
+
+.left {
+  margin-left: 0;
+  margin-right: auto;
+}

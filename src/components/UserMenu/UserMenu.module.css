@@ -1,0 +1,198 @@
+.userMenu {
+  position: relative;
+  display: inline-flex;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: 1.5px solid var(--color-border, #e5e7eb);
+  border-radius: 40px;
+  padding: 5px 14px 5px 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.trigger:hover {
+  border-color: var(--color-gold, #c9a84c);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.12);
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c9a84c, #f0c040);
+  color: #0a1628;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary, #1a2340);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.rolePill {
+  background: var(--color-gold-light, rgba(201,168,76,0.15));
+  color: var(--color-gold, #c9a84c);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.chevron {
+  font-size: 11px;
+  color: var(--color-text-muted, #6b7280);
+}
+
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #ffffff;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  min-width: 200px;
+  z-index: 200;
+  padding: 6px;
+  animation: dropIn 0.15s ease both;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--color-text-primary, #1a2340);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+.dropItem:hover { background: #f3f4f6; }
+
+.dropItemDanger { color: var(--color-danger, #dc2626); }
+.dropItemDanger:hover { background: rgba(220, 38, 38, 0.06); }
+
+.dropIcon { font-size: 15px; }
+
+.dropDivider {
+  height: 1px;
+  background: var(--color-border, #e5e7eb);
+  margin: 4px 8px;
+}
+
+/* Confirmation modal */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 32px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.2s ease both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary, #1a2340);
+  margin: 0 0 10px;
+}
+
+.modalBody {
+  font-size: 14px;
+  color: var(--color-text-muted, #6b7280);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cancelBtn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-border, #e5e7eb);
+  background: none;
+  color: var(--color-text-muted, #6b7280);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.18s, color 0.18s;
+}
+.cancelBtn:hover { border-color: #9ca3af; color: var(--color-text-primary, #1a2340); }
+
+.signOutBtn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background: var(--color-danger, #dc2626);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.signOutBtn:hover { background: #b91c1c; }
+.signOutBtn:disabled { opacity: 0.6; cursor: not-allowed; }

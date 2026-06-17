@@ -1,0 +1,590 @@
+/* ==========================================================================
+   DemoSection — split-card: navy left | white right
+   ========================================================================== */
+
+/* ---------- Animatable CSS custom property for the halo ---------- */
+@property --demo-halo-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes demoRotateHalo {
+  from { --demo-halo-angle: 0deg; }
+  to   { --demo-halo-angle: 360deg; }
+}
+
+/* ==========================================================================
+   CHANGE 3 — Outer wrapper: white page, narrow side margins
+   ========================================================================== */
+.demoSection {
+  background: #ffffff;
+  width: 100%;
+  padding: 40px 24px 40px;
+  margin-bottom: 60px;
+}
+
+/* ---------- Centered card container ----------
+   overflow: visible so the formCard lift shadow isn't clipped.
+   Rounded corners are applied per-column instead (see below). */
+.demoCard {
+  max-width: 1400px;
+  margin: 0 auto;
+  box-shadow:
+    0 24px 64px rgba(23, 46, 82, 0.22),
+    0 4px 16px rgba(23, 46, 82, 0.09);
+  border-radius: 24px;
+  overflow: hidden; /* keeps background colors clipped to border-radius */
+}
+
+/* ---------- Two-column flex ---------- */
+.demoInner {
+  display: flex;
+  align-items: stretch;
+}
+
+/* ==========================================================================
+   LEFT COLUMN — navy gradient background
+   ========================================================================== */
+.demoLeft {
+  flex: 0 0 42%;
+  align-self: stretch;
+  background: linear-gradient(135deg, #172e52 0%, #1E3A5F 100%);
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top label */
+.demoLabel {
+  color: #d4900a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Main heading */
+.demoHeading {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0 0 16px;
+}
+
+.demoAccent {
+  color: #d4900a;
+}
+
+/* Body text */
+.demoBody {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 15px;
+  line-height: 1.75;
+  margin: 0 0 28px;
+}
+
+/* ==========================================================================
+   CHANGE 2 — Button wrapper + rotating halo
+   ========================================================================== */
+.demoButtonWrapper {
+  position: relative;
+  display: inline-flex;
+  align-self: flex-start;
+  /* overflow: visible so the -3px halo bleeds outside without clipping */
+}
+
+/* Rotating conic-gradient halo ring (sits 3px outside button on all sides) */
+.demoButtonWrapper::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 11px; /* button border-radius (8px) + 3px */
+  background: conic-gradient(
+    from var(--demo-halo-angle),
+    transparent 0deg,
+    #f5a800 60deg,
+    rgba(245, 168, 0, 0.7) 90deg,
+    transparent 150deg
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.demoButtonWrapper:hover::before {
+  opacity: 1;
+  animation: demoRotateHalo 1.8s linear infinite;
+}
+
+/* Inner glow ring on hover */
+.demoButtonWrapper::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 11px;
+  box-shadow:
+    0 0 20px rgba(245, 168, 0, 0.6),
+    0 0 40px rgba(245, 168, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.demoButtonWrapper:hover::after {
+  opacity: 1;
+}
+
+/* ---------- The button itself ---------- */
+.demoButton {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  overflow: visible;
+  background: #d4900a;
+  color: #ffffff;
+  padding: 13px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  text-decoration: none;
+  /* Resting state */
+  transform: translateY(0);
+  box-shadow: 0 4px 16px rgba(212, 144, 10, 0.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 3D lift on hover */
+.demoButton:hover {
+  background: #c07d08;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(212, 144, 10, 0.5);
+}
+
+/* Press feedback on click */
+.demoButton:active {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 144, 10, 0.4);
+  transition: all 0.1s ease;
+}
+
+/* ---------- Divider ---------- */
+.demoDivider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 28px 0;
+}
+
+/* ---------- Contact info rows ---------- */
+.infoRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.infoRow:last-of-type {
+  margin-bottom: 0;
+}
+
+.infoRow:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.infoIcon {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  background: rgba(212, 144, 10, 0.15);
+  border: 1px solid rgba(212, 144, 10, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d4900a;
+  flex-shrink: 0;
+}
+
+.infoLabel {
+  font-size: 10px;
+  color: #d4900a;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.infoValue {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.infoLink {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  display: block;
+  font-size: 12px;
+  line-height: 1.6;
+  transition: color 0.2s ease;
+}
+
+.infoLink:hover {
+  color: #d4900a;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN — pure white background
+   ========================================================================== */
+.demoRight {
+  flex: 1;
+  min-width: 0;
+  align-self: stretch;
+  background: #ffffff;
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   FORM CARD — 3D lift on hover
+   The card floats within the white demoRight column.
+   ========================================================================== */
+.formCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  /* Subtle border — visible against white background */
+  border: 1.5px solid #d6e4f0;
+  border-radius: 16px;
+  padding: 4px; /* tiny inset so the hover ring shows cleanly */
+  /* Resting elevation */
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  /* Springy transition */
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* GPU-accelerated 3D */
+  position: relative;
+  will-change: transform;
+  transform-style: preserve-3d;
+  transform: translateY(0) translateZ(0);
+}
+
+.formCard:hover {
+  transform: translateY(-8px) translateZ(20px);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.22),
+    0 0 0 1.5px rgba(212, 144, 10, 0.25);
+  border-color: rgba(212, 144, 10, 0.4);
+}
+
+/* Inner content wrapper — keeps padding inside border-radius */
+.formCardInner {
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.formTitle {
+  color: #1E3A5F;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+.formSubtext {
+  color: #4a5568;
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+.formHeaderDivider {
+  border: none;
+  border-top: 1px solid #e8f0f8;
+  margin-bottom: 22px;
+}
+
+/* The <form> element: grows to fill formCardInner and becomes a flex column
+   so .formTextareaGroup can use flex: 1 to absorb remaining height. */
+.formBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ---------- Form fields ---------- */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 14px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+
+.formLabel {
+  color: #374151;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  display: block;
+}
+
+.formRequired {
+  color: #d4900a;
+  margin-left: 2px;
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  background-color: #f8fafc;
+  border: 1.5px solid #d1dce8;
+  border-radius: 8px;
+  color: #1E3A5F;
+  padding: 11px 14px;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: #9ca3af;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  border-color: #d4900a;
+  background-color: #fffbf2;
+  box-shadow: 0 0 0 3px rgba(212, 144, 10, 0.1);
+}
+
+.formSelect {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23D4900A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.formSelect option {
+  background-color: #ffffff;
+  color: #1E3A5F;
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+/* Message textarea group — absorbs all extra height so columns balance */
+.formTextareaGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 16px;
+  min-height: 0;
+}
+
+/* When inside the growing group, textarea fills it */
+.formTextareaGroup .formTextarea {
+  flex: 1;
+  min-height: 120px;
+  resize: none;
+}
+
+.formCheckboxRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.formCheckboxRow input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  accent-color: #d4900a;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.formCheckboxRow label {
+  color: #4a5568;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.privacyLink {
+  color: #d4900a;
+  text-decoration: none;
+}
+
+.privacyLink:hover {
+  text-decoration: underline;
+}
+
+.formLegend {
+  color: #9ca3af;
+  font-size: 11px;
+  margin: 0 0 14px;
+}
+
+.submitButton {
+  background: #d4900a;
+  color: #ffffff;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  font-family: inherit;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.submitButton:hover {
+  background: #b8790a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 144, 10, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.fieldError {
+  color: #e53e3e;
+  font-size: 12px;
+  margin-top: 3px;
+  display: block;
+}
+
+/* ---------- Success state ---------- */
+.successState {
+  text-align: center;
+  padding: 48px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.successTitle {
+  color: #1E3A5F;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 20px 0 0;
+}
+
+.successText {
+  color: #4a5568;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 10px 0 0;
+}
+
+.resetLink {
+  color: #d4900a;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  font-family: inherit;
+  margin-top: 20px;
+  display: block;
+}
+
+/* ==========================================================================
+   Responsive — Mobile ≤768px
+   ========================================================================== */
+@media (max-width: 768px) {
+  .demoSection {
+    padding: 24px 12px 32px;
+  }
+
+  .demoCard {
+    border-radius: 16px;
+  }
+
+  .demoInner {
+    flex-direction: column;
+  }
+
+  .demoLeft {
+    flex: none;
+    width: 100%;
+    padding: 32px 24px;
+  }
+
+  .demoRight {
+    flex: none;
+    width: 100%;
+    padding: 28px 20px;
+  }
+
+  .demoHeading {
+    font-size: 28px;
+  }
+
+  .formCard {
+    padding: 2px;
+  }
+
+  .formCardInner {
+    padding: 24px 16px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formCard:hover {
+    transform: none;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-color: #d6e4f0;
+  }
+}

@@ -1,0 +1,114 @@
+.section {
+  position: relative;
+  background-color: #1E3A5F;
+  color: #ffffff;
+  /* Diagonal slant top edge */
+  clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
+  margin-top: -1px;
+  padding: 120px 0 96px;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: center;
+  gap: 48px;
+}
+
+/* ---------- Illustration ---------- */
+.illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+}
+
+.network line {
+  animation: dash 3s ease-in-out infinite alternate;
+}
+
+.bars rect {
+  transform-origin: bottom;
+  animation: grow 2.5s ease-in-out infinite alternate;
+}
+
+.shield {
+  animation: floatShield 4s ease-in-out infinite;
+}
+
+/* ---------- Content ---------- */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.heading {
+  font-size: 36px;
+  line-height: 1.25;
+  color: var(--color-white);
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ---------- Animations ---------- */
+@keyframes dash {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleY(0.85);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes floatShield {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    clip-path: polygon(0 36px, 100% 0, 100% 100%, 0 100%);
+    padding: 96px 0 72px;
+  }
+  .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 32px;
+  }
+  .heading {
+    font-size: 28px;
+  }
+}

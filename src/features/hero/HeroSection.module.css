@@ -1,0 +1,201 @@
+﻿.hero {
+  position: relative;
+  background-color: #1E3A5F;
+  color: #ffffff;
+  padding-bottom: 96px;
+  overflow: hidden;
+}
+
+/* Animated dot-grid background */
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  animation: gridPulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  animation: fadeInUp 0.8s ease both;
+}
+
+/* Left/right columns — widths extracted from inline styles so media
+   queries can collapse them to full width on tablet/mobile. */
+.heroLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 60%;
+  justify-content: center;
+}
+
+.heroRight {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Left content ---------- */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.label {
+  align-self: flex-start;
+  background-color: rgba(212, 144, 10, 0.15);
+  color: #d4900a;
+  border: 1px solid rgba(212, 144, 10, 0.4);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #ffffff;
+}
+
+.accent {
+  color: #d4900a;
+}
+
+.subtext {
+  font-size: 18px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 620px;
+}
+
+/* ---------- Search bar ---------- */
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  border-radius: 999px;
+  padding: 6px 6px 6px 22px;
+  max-width: 520px;
+  box-shadow: 0 8px 24px rgba(26, 58, 107, 0.12);
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #1a1a2e;
+  background: transparent;
+  padding: 12px 0;
+}
+
+.searchInput::placeholder {
+  color: #6b7280;
+}
+
+.scanButton {
+  background-color: #d4900a;
+  color: #1E3A5F;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.scanButton:hover {
+  background-color: #b67d08;
+  transform: scale(1.03);
+}
+
+/* ---------- Right visual ---------- */
+.visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Animations ---------- */
+@keyframes gridPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .heroLeft {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .heroRight {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .label {
+    align-self: center;
+  }
+  .subtext {
+    margin: 0 auto;
+  }
+  .searchBar {
+    margin: 0 auto;
+  }
+  .visual {
+    margin-top: 32px;
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 34px;
+  }
+  .subtext {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroRight {
+    max-width: 300px;
+  }
+}

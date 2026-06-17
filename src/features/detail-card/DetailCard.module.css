@@ -1,0 +1,140 @@
+.section {
+  background-color: var(--color-white);
+  padding: 88px 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* ---------- Left list card ---------- */
+.listCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: var(--color-bg-light);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-base);
+}
+
+.listRow:hover {
+  transform: translateX(6px);
+}
+
+.listIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.listIcon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.teal {
+  background-color: var(--color-teal);
+}
+.orange {
+  background-color: var(--color-orange);
+}
+.yellow {
+  background-color: var(--color-accent);
+}
+.blue {
+  background-color: var(--color-blue);
+}
+
+.listLabel {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ---------- Right content ---------- */
+.heading {
+  font-size: 36px;
+  color: var(--color-primary);
+  margin-bottom: 36px;
+  line-height: 1.25;
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.featureRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.rowIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  margin-top: 2px;
+}
+
+.rowTitle {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+
+.rowBody {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .heading {
+    font-size: 30px;
+  }
+}

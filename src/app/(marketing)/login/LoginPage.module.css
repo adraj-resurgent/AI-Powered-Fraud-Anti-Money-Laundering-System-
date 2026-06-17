@@ -1,0 +1,509 @@
+/* ============================================================
+   Login Page — split layout with 3D form card
+   ============================================================ */
+
+/* ── Page shell (LoginPage_page__ommXu) ─────────────────────── */
+.page {
+  background-color: #ffffff;
+  background: #ffffff;
+  min-height: calc(100vh - 80px);
+  padding-bottom: 60px;   /* prevents sticky footer overlapping the card */
+}
+
+/* ── Outer wrapper — no padding, scrollWrapper owns the top gap ── */
+.content {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* ── Parallax scroll wrapper — starts at 48px, shrinks on scroll ── */
+.scrollWrapper {
+  padding-top: 48px;
+  transition: padding-top 0.3s ease;
+}
+
+/* ── Split card container (LoginPage_splitCard__k0v9G) ───────── */
+.splitCard {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 80px;                   /* gap before sticky footer */
+  min-height: calc(100vh - 220px);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* ── LEFT — navy branding panel ─────────────────────────────── */
+.left {
+  flex: 0 0 44%;
+  background: linear-gradient(145deg, #0f2240 0%, #172e52 40%, #1E3A5F 100%);
+  padding: 52px 48px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle gold glow top-right */
+.left::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.logoWrap {
+  margin-bottom: 40px;
+}
+
+.tagline {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.22;
+  color: #ffffff;
+  margin: 0 0 14px;
+}
+
+.taglineAccent {
+  color: #d4900a;
+}
+
+.taglineSub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.60);
+  line-height: 1.7;
+  margin: 0 0 36px;
+}
+
+.features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0 0 36px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.84);
+  font-weight: 500;
+}
+
+.featureIcon {
+  font-size: 18px;
+  line-height: 1;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.support {
+  margin-top: auto;
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+}
+
+.supportLink {
+  color: #d4900a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.supportLink:hover {
+  text-decoration: underline;
+}
+
+/* ── RIGHT — white form panel ───────────────────────────────── */
+.right {
+  flex: 1;
+  background: #f0f4fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 52px 44px;
+}
+
+/* ── 3-D form card ───────────────────────────────────────────
+   Resting: deep layered box-shadow gives a "floating" feel.
+   Hover: card lifts with a perspective tilt — tactile 3D press.
+   ─────────────────────────────────────────────────────────── */
+.formCard {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 44px 40px 36px;
+  border: 1px solid #e2ecf7;
+
+  /* ── layered shadow stack = floating card illusion ── */
+  box-shadow:
+    0 1px 2px  rgba(30, 64, 120, 0.06),
+    0 2px 4px  rgba(30, 64, 120, 0.06),
+    0 4px 8px  rgba(30, 64, 120, 0.06),
+    0 8px 16px rgba(30, 64, 120, 0.06),
+    0 20px 40px rgba(30, 64, 120, 0.10),
+    0 40px 80px rgba(30, 64, 120, 0.06);
+
+  /* GPU layer so transforms are smooth */
+  will-change: transform, box-shadow;
+  transform: translateY(0) perspective(800px) rotateX(0deg) rotateY(0deg);
+  transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+              box-shadow 0.38s ease;
+}
+
+/* Lift + tilt on hover → tactile 3D press */
+.formCard:hover {
+  transform: translateY(-8px) perspective(800px) rotateX(1.5deg) rotateY(-1.5deg);
+  box-shadow:
+    0 2px 4px   rgba(30, 64, 120, 0.07),
+    0 4px 8px   rgba(30, 64, 120, 0.07),
+    0 8px 16px  rgba(30, 64, 120, 0.07),
+    0 16px 32px rgba(30, 64, 120, 0.08),
+    0 32px 64px rgba(30, 64, 120, 0.12),
+    0 60px 120px rgba(30, 64, 120, 0.08),
+    /* gold rim glow on lift */
+    0 0 0 1px rgba(212, 144, 10, 0.18);
+}
+
+/* ── Card internals ─────────────────────────────────────────── */
+.formHeader {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.formTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1E3A5F;
+  margin: 0 0 6px;
+  letter-spacing: -0.3px;
+}
+
+.formSubtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* ── Form fields ── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+}
+
+.input {
+  background: #f8fafc;
+  border: 1.5px solid #d1dce8;
+  border-radius: 10px;
+  color: #1E3A5F;
+  padding: 13px 16px;
+  /* 16px prevents iOS Safari from auto-zooming on focus */
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  caret-color: #d4900a;
+  /* strip iOS default chrome (inner shadow / rounded look) — keep our radius */
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input::placeholder {
+  color: #b0bac7;
+}
+
+.input:focus {
+  border-color: #d4900a;
+  background: #fffcf5;
+  box-shadow: 0 0 0 3px rgba(212, 144, 10, 0.12);
+}
+
+/* autofill — keep light background */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 100px #f8fafc inset !important;
+  -webkit-text-fill-color: #1E3A5F !important;
+  caret-color: #d4900a;
+}
+
+/* ── Password wrap ── */
+.passWrap {
+  position: relative;
+  display: flex;
+}
+
+.passWrap .input {
+  padding-right: 48px;
+}
+
+.eye {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 46px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.eye:hover { color: #d4900a; }
+
+/* ── Remember me + Forgot ── */
+.checkRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: -2px;
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #4b5563;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkInput { display: none; }
+
+.checkBox {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  border: 1.5px solid #d1dce8;
+  border-radius: 4px;
+  background: #f8fafc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.checkBox.checked {
+  background: #d4900a;
+  border-color: #d4900a;
+}
+
+.checkBox.checked::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  border: 2px solid #ffffff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translate(-1px, -1px);
+  display: block;
+}
+
+.forgot {
+  font-size: 13px;
+  color: #d4900a;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.forgot:hover {
+  color: #b8790a;
+  text-decoration: underline;
+}
+
+/* ── Error ── */
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-left: 3px solid #e11d48;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 13px;
+  color: #9f1239;
+  line-height: 1.45;
+}
+
+/* ── Submit button ── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px;
+  margin-top: 4px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #0a1628;
+  cursor: pointer;
+  /* iOS: honour cursor/tap, kill grey tap flash and 300ms delay */
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  background: linear-gradient(135deg, #f5d485 0%, #d4900a 60%, #a67c2e 100%);
+  box-shadow:
+    0 4px 0 #8b6914,
+    0 6px 16px rgba(212, 144, 10, 0.38),
+    inset 0 1px 0 rgba(255,255,255,0.28);
+  transform: translateY(0);
+  transition: all 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow:
+    0 2px 0 #8b6914,
+    0 3px 8px rgba(212, 144, 10, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #8b6914, inset 0 1px 4px rgba(0,0,0,0.12);
+}
+
+.btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+/* ── Spinner ── */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(10,22,40,0.25);
+  border-top-color: #0a1628;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Trust badges ── */
+.badges {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  background: #f0f4fa;
+  border-radius: 999px;
+  padding: 5px 13px;
+}
+
+/* ── Footer (LoginPage_footer__7PBO_) — sticky, always visible ── */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  /* clear the iPhone home-indicator / notch safe areas (no-op on other devices) */
+  padding: 12px calc(24px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom))
+    calc(24px + env(safe-area-inset-left));
+  text-align: center;
+}
+
+.footerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footerCopy {
+  font-size: 12px;
+  color: #555555;
+}
+
+.footerLinks {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footerLink {
+  font-size: 12px;
+  color: #c9a84c;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.18s;
+}
+
+.footerLink:hover {
+  color: #c9a84c;
+  text-decoration: underline;
+}
+
+.footerSep { font-size: 12px; color: #555555; }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .splitCard { flex-direction: column; max-width: 480px; }
+  /* Form panel first, navy branding panel below it on mobile */
+  .right { padding: 36px 24px; order: 1; }
+  .left  { flex: none; padding: 36px 28px; order: 2; }
+  .tagline { font-size: 24px; }
+  .features { display: none; }
+  .formCard { padding: 32px 24px; }
+}

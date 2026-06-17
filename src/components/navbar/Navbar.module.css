@@ -1,0 +1,280 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  /* Always white with a permanent shadow — no scroll-dependent styling */
+  background-color: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  height: var(--navbar-height);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.logo img {
+  width: 140px;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* ---------- Desktop links ---------- */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.linkItem {
+  position: relative;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-base);
+}
+
+.link:hover {
+  color: var(--color-accent);
+}
+
+.caret {
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  display: inline-block;
+}
+
+/* ---------- Dropdown ---------- */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 260px;
+  background-color: var(--color-white);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    visibility var(--transition-base);
+}
+
+/* Transparent bridge fills the gap between trigger and panel so the
+   dropdown stays open while the pointer crosses over. */
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+/* Wide 2-column icon grid (Products) */
+.dropdownWide {
+  grid-template-columns: 1fr 1fr;
+  min-width: 520px;
+  gap: 4px 12px;
+}
+
+.dropdownOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdownLink {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  font-size: 15px;
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+/* Circular yellow icon badge */
+.dropdownIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  transition: transform var(--transition-base);
+}
+
+.dropdownIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dropdownLabel {
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.dropdownLink:hover {
+  background-color: #fff8ec;
+  color: var(--color-accent);
+}
+
+.dropdownLink:hover .dropdownIcon {
+  transform: scale(1.08);
+}
+
+/* ---------- Right actions ---------- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ---------- Hamburger ---------- */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  border-radius: 2px;
+  background-color: var(--color-primary);
+  transition: transform var(--transition-base), opacity var(--transition-base);
+}
+
+.menuActive .hamburger span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.menuActive .hamburger span:nth-child(2) {
+  opacity: 0;
+}
+.menuActive .hamburger span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ---------- Mobile menu ---------- */
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  background-color: var(--color-white);
+  padding: 0 24px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+
+.mobileOpen {
+  max-height: calc(100vh - var(--navbar-height));
+  overflow-y: auto;
+  padding: 16px 24px 32px;
+  box-shadow: var(--shadow-md);
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileLinkItem {
+  border-bottom: 1px solid rgba(26, 58, 107, 0.08);
+}
+
+.mobileLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-primary);
+  text-align: left;
+}
+
+.mobileDropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.mobileDropdownOpen {
+  max-height: 400px;
+}
+
+.mobileSubLink {
+  display: block;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.mobileSubLink:hover {
+  color: var(--color-accent);
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .links,
+  .actions {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .mobileMenu {
+    display: flex;
+  }
+}
