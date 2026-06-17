@@ -47,7 +47,9 @@ function normalize(raw: any, queriedName: string): Normalized {
     risk_category: (m?.risk_category ?? '').toString().toLowerCase(),
     detail_page_url:
       [m?.detail_page_url, m?.source_url, m?.source_page_url, m?.document_url]
-        .find((u: unknown) => typeof u === 'string' && u.trim().length > 0) ?? null,
+        .map((u: unknown) => (typeof u === 'string' ? u.trim() : ''))
+        // Only allow http/https links — blocks javascript:, data:, etc. (XSS)
+        .find((u: string) => /^https?:\/\//i.test(u)) ?? null,
   }));
   let rl = (raw?.risk_level ?? '').toString().toUpperCase();
   if (!['HIGH', 'MEDIUM', 'LOW'].includes(rl)) {

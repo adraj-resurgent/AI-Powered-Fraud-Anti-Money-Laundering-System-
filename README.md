@@ -77,6 +77,8 @@ cp .env.example .env.local
 | `DATABASE_URL` | ✅ | PostgreSQL connection string (`postgresql://user:pass@host:5432/db?sslmode=require`) |
 | `JWT_SECRET` | ✅ | Secret for signing JWTs. Use 32+ random chars. |
 | `NODE_ENV` | ✅ | `development` or `production` |
+| `SCREENING_UPSTREAM_URL` | ⬜ | Screening engine endpoint (use `https://`). Required for the screening feature. |
+| `SCREENING_API_KEY` | ⬜ | API key for the screening engine. Set in env only — never in source. |
 
 Generate a strong `JWT_SECRET`:
 ```bash

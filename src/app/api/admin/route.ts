@@ -1,9 +1,31 @@
 
 import { NextRequest, NextResponse } from 'next/server'
+import { jwtVerify } from 'jose'
 import pool from '@/lib/db'
 import bcrypt from 'bcryptjs'
 
+const SECRET = new TextEncoder().encode(process.env.JWT_SECRET!)
+
+// Roles this endpoint is allowed to assign. 'admin' is intentionally excluded so
+// no caller can escalate privileges through the API — admins are provisioned
+// manually in the database.
+const ASSIGNABLE_ROLES = ['client']
+
 export async function POST(req: NextRequest) {
+  // ── Auth gate — must be a logged-in admin (middleware does not cover /api/admin) ──
+  const token = req.cookies.get('token')?.value
+  if (!token) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  try {
+    const { payload } = await jwtVerify(token, SECRET)
+    if (payload.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+  } catch {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   const { action, id, email, name, company, days = 2, password: customPass, role } = await req.json()
 
   if (action === 'create') {
@@ -11,7 +33,7 @@ export async function POST(req: NextRequest) {
     const tempPass = customPass?.trim() || 'Demo@' + Math.random().toString(36).slice(2, 8)
     const hash = await bcrypt.hash(tempPass, 10)
     const expiresAt = new Date(Date.now() + Number(days) * 86400000)
-    const userRole = role || 'client'
+    const userRole = ASSIGNABLE_ROLES.includes(role) ? role : 'client'
     await pool.query(
       `INSERT INTO users
         (name, email, password, company, role, account_type, expires_at, is_active)

@@ -3,8 +3,10 @@ import { jwtVerify } from 'jose';
 
 const SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
 
-const UPSTREAM_URL = 'http://65.1.148.112:8002/api/screen';
-const API_KEY = 'screen-live-87086a78-5375-4beb-964e-1abf19efeb2d';
+// Provided at runtime via env vars — never hardcode (keys leak in source control).
+// Prefer an https:// upstream so the API key isn't sent in cleartext.
+const UPSTREAM_URL = process.env.SCREENING_UPSTREAM_URL;
+const API_KEY = process.env.SCREENING_API_KEY;
 
 /**
  * Server-side proxy for the Entity & Organisation Screening API.
@@ -35,6 +37,15 @@ export async function POST(req: NextRequest) {
   }
   if (!name) {
     return NextResponse.json({ error: 'Please enter a name to screen.' }, { status: 400 });
+  }
+
+  // ── Ensure the upstream is configured ──
+  if (!UPSTREAM_URL || !API_KEY) {
+    console.error('Screening engine not configured: set SCREENING_UPSTREAM_URL and SCREENING_API_KEY');
+    return NextResponse.json(
+      { error: 'Screening engine is not configured.' },
+      { status: 503 },
+    );
   }
 
   // ── Forward to the screening engine ──

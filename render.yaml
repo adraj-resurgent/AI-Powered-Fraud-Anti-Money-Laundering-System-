@@ -1,0 +1,29 @@
+# Render Blueprint — provisions the Next.js web service automatically.
+# In Render: New + → Blueprint → connect this repo. Render reads this file,
+# then prompts you to fill the secret env vars marked `sync: false`.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: ai-powered-fraud-aml-system
+    runtime: node
+    plan: free
+    region: singapore        # closest to the ap-southeast DB; change if needed
+    branch: main
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"
+      # Secrets — set these in the Render dashboard (not stored in the repo).
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: SCREENING_UPSTREAM_URL
+        sync: false
+      - key: SCREENING_API_KEY
+        sync: false
