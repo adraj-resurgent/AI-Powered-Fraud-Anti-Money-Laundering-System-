@@ -9,7 +9,9 @@ services:
     plan: free
     region: singapore        # closest to the ap-southeast DB; change if needed
     branch: main
-    buildCommand: npm ci && npm run build
+    # --include=dev ensures TypeScript/@types (devDependencies) are installed even
+    # though NODE_ENV=production is set, which npm would otherwise omit.
+    buildCommand: npm ci --include=dev && npm run build
     startCommand: npm run start
     healthCheckPath: /
     autoDeploy: true
